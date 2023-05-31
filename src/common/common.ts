@@ -46,6 +46,7 @@ export enum EStatusPaymentOrder {
 export enum ETypeService {
   ROOM_SERVICE = 'ROOM_SERVICE',
   OTHER_SERVICE = 'OTHER_SERVICE',
+  TOUR_SERVICE = 'TOUR_SERVICE',
 }
 
 export enum EStatusBookingRoom {
