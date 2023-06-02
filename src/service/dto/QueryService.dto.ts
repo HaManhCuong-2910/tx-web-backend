@@ -7,7 +7,11 @@ export class QueryServiceDto {
 
   @IsOptional()
   @IsString()
-  typeService: string;
+  typeService: string | Object;
+
+  @IsOptional()
+  @IsString()
+  navigate: string;
 
   @IsOptional()
   @IsString()

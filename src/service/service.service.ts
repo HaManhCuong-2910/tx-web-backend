@@ -44,7 +44,7 @@ export class ServiceService {
   }
 
   async getListService(query: QueryServiceDto) {
-    const { page = 1, limit = 10, name, ...filterSearch } = query;
+    const { page = 1, limit = 10, name,navigate, ...filterSearch } = query;
 
     const skip = Number(limit) * Number(page) - Number(limit);
 
@@ -52,6 +52,9 @@ export class ServiceService {
 
     if (name) {
       querySearch['name'] = { $regex: '.*' + name + '.*', $options: 'i' };
+    }
+    if(navigate && filterSearch.typeService){
+      filterSearch.typeService = {$ne: filterSearch.typeService}
     }
 
     querySearch = {
