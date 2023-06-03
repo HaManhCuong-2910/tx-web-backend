@@ -176,11 +176,13 @@ export class RoomService {
         result = result.map((item) => item.room);
 
         result = result.reduce((unique, o) => {
-          if (!unique.some((obj) => obj._id === o._id)) {
+          if (!unique.some((obj) => obj?._id === o?._id)) {
             unique.push(o);
           }
           return unique;
         }, []);
+
+        result = result.filter((itemFil) => !!itemFil);
 
         if (sort === 'typeRoom' && sort_value) {
           result = result.filter((item) => item.typeRoom._id === sort_value);
