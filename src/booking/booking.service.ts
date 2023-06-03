@@ -276,6 +276,9 @@ export class BookingService {
       status === EStatusBookingRoom.HUY_DAT
     ) {
       await this.roomRepository.handleReRoom(id);
+    }
+
+    if (status) {
       queryStatus = { status };
     }
 
