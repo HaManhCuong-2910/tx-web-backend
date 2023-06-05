@@ -56,10 +56,10 @@ export class RoomRepository extends BaseRepository<Room> {
     );
   }
 
-  async handleReRoom(id: string) {
-    await this.roomModel.updateOne(
+  async handleReRoom(_id: ObjectId) {
+    return await this.roomModel.updateOne(
       {
-        _id: new ObjectId(id),
+        _id,
       },
       { $inc: { quantity: 1 } },
     );

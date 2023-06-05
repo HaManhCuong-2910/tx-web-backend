@@ -3,23 +3,23 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
-} from "@nestjs/common";
-import { CCreateBookingDto } from "./dto/CreateBooking.dto";
-import { BookingRepository } from "./repository/booking.repository";
-import { ObjectId } from "mongodb";
-import { CQuerySearchBookingDto } from "./dto/QuerySearchBooking";
-import * as moment from "moment";
-import { UpdateBookingDto } from "./dto/UpdateBooking";
-import { RoomRepository } from "src/room/repository/room.repository";
-import { EStatusBookingRoom, formatNumberMoney } from "src/common/common";
-import { MailerService } from "@nestjs-modules/mailer";
+} from '@nestjs/common';
+import { CCreateBookingDto } from './dto/CreateBooking.dto';
+import { BookingRepository } from './repository/booking.repository';
+import { ObjectId } from 'mongodb';
+import { CQuerySearchBookingDto } from './dto/QuerySearchBooking';
+import * as moment from 'moment';
+import { UpdateBookingDto } from './dto/UpdateBooking';
+import { RoomRepository } from 'src/room/repository/room.repository';
+import { EStatusBookingRoom, formatNumberMoney } from 'src/common/common';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class BookingService {
   constructor(
     private readonly bookingRepository: BookingRepository,
     private readonly roomRepository: RoomRepository,
-    private readonly mailerService: MailerService
+    private readonly mailerService: MailerService,
   ) {}
 
   async GetListBooking(query: CQuerySearchBookingDto) {
@@ -36,17 +36,17 @@ export class BookingService {
     } = query;
     const countNightCustom = moment(checkOutDay).diff(
       moment(checkInDay),
-      "days"
+      'days',
     );
 
     if (countNightCustom < 0 || Number(nightCount) < 0) {
-      throw new HttpException("Số đêm không hợp lệ", HttpStatus.BAD_REQUEST);
+      throw new HttpException('Số đêm không hợp lệ', HttpStatus.BAD_REQUEST);
     }
 
     if (Number(Adult) <= 0 && Number(children) <= 0) {
       throw new HttpException(
-        "Số lượng người lớn hoặc trẻ em không hợp lệ",
-        HttpStatus.BAD_REQUEST
+        'Số lượng người lớn hoặc trẻ em không hợp lệ',
+        HttpStatus.BAD_REQUEST,
       );
     }
 
@@ -63,7 +63,7 @@ export class BookingService {
     }
 
     if (name) {
-      querySearch.push({ name: { $regex: ".*" + name + ".*", $options: "i" } });
+      querySearch.push({ name: { $regex: '.*' + name + '.*', $options: 'i' } });
     }
 
     if (checkOutDay) {
@@ -82,13 +82,13 @@ export class BookingService {
 
     if (Adult) {
       querySearch.push({
-        "AmountPeople.Adult": Adult,
+        'AmountPeople.Adult': Adult,
       });
     }
 
     if (children) {
       querySearch.push({
-        "AmountPeople.children": children,
+        'AmountPeople.children': children,
       });
     }
 
@@ -106,28 +106,28 @@ export class BookingService {
       { skip, limit, sort: { updatedAt: -1 } },
       [
         {
-          path: "room",
-          model: "Room",
+          path: 'room',
+          model: 'Room',
           populate: [
             {
-              path: "service",
-              model: "Service",
+              path: 'service',
+              model: 'Service',
             },
             {
-              path: "typeRoom",
-              model: "TypeRoom",
+              path: 'typeRoom',
+              model: 'TypeRoom',
             },
           ],
         },
         {
-          path: "service.id",
-          model: "Service",
+          path: 'service.id',
+          model: 'Service',
         },
-      ]
+      ],
     );
 
     const countRecord = await this.bookingRepository.countDocuments(
-      querySearch
+      querySearch,
     );
 
     return {
@@ -164,24 +164,24 @@ export class BookingService {
           undefined,
           [
             {
-              path: "room",
-              model: "Room",
+              path: 'room',
+              model: 'Room',
               populate: [
                 {
-                  path: "service",
-                  model: "Service",
+                  path: 'service',
+                  model: 'Service',
                 },
                 {
-                  path: "typeRoom",
-                  model: "TypeRoom",
+                  path: 'typeRoom',
+                  model: 'TypeRoom',
                 },
               ],
             },
             {
-              path: "service.id",
-              model: "Service",
+              path: 'service.id',
+              model: 'Service',
             },
-          ]
+          ],
         );
         const listService =
           resultDetail.service.length > 0
@@ -215,7 +215,7 @@ export class BookingService {
                     <b>Ngày nhận phòng:</b>
                     <span
                       >${moment(resultDetail.checkInDay).format(
-                        "DD/MM/YYYY HH:mm"
+                        'DD/MM/YYYY HH:mm',
                       )}</span
                     >
                   </li>
@@ -223,14 +223,14 @@ export class BookingService {
                     <b>Ngày trả phòng:</b>
                     <span
                       >${moment(resultDetail.checkOutDay).format(
-                        "DD/MM/YYYY HH:mm"
+                        'DD/MM/YYYY HH:mm',
                       )}</span
                     >
                   </li>
                   <li>
                     <b>Dịch vụ:</b>
                     <span>${
-                      listService.length > 0 ? listService.join(", ") : ""
+                      listService.length > 0 ? listService.join(', ') : ''
                     }</span>
                   </li>
                   <li><b>Phòng:</b> <span>${resultDetail.room.title}</span></li>
@@ -248,14 +248,14 @@ export class BookingService {
                   }</span></li>
                 </ul>
                 <p><b>Tổng giá:</b> ${formatNumberMoney(
-                  resultDetail.prices
+                  resultDetail.prices,
                 )} VNĐ/Đêm</p>
               </body>
             </html>
             `,
           })
           .catch((err) => {
-            console.log("err", err);
+            console.log('err', err);
             throw new BadRequestException();
           });
         return {
@@ -264,7 +264,7 @@ export class BookingService {
         };
       }
     } catch (error) {
-      throw new HttpException("Không thành công", HttpStatus.BAD_REQUEST);
+      throw new HttpException('Không thành công', HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -275,7 +275,10 @@ export class BookingService {
       status === EStatusBookingRoom.DA_TRA_PHONG ||
       status === EStatusBookingRoom.HUY_DAT
     ) {
-      await this.roomRepository.handleReRoom(id);
+      let detailRoom = await this.bookingRepository.findByCondition({
+        _id: new ObjectId(id),
+      });
+      await this.roomRepository.handleReRoom(detailRoom.room);
     }
 
     if (status) {
@@ -312,24 +315,24 @@ export class BookingService {
         undefined,
         [
           {
-            path: "room",
-            model: "Room",
+            path: 'room',
+            model: 'Room',
             populate: [
               {
-                path: "service",
-                model: "Service",
+                path: 'service',
+                model: 'Service',
               },
               {
-                path: "typeRoom",
-                model: "TypeRoom",
+                path: 'typeRoom',
+                model: 'TypeRoom',
               },
             ],
           },
           {
-            path: "service.id",
-            model: "Service",
+            path: 'service.id',
+            model: 'Service',
           },
-        ]
+        ],
       );
 
       if (result) {
@@ -339,9 +342,9 @@ export class BookingService {
         };
       }
 
-      throw new HttpException("Không tìm thấy đơn", HttpStatus.NOT_FOUND);
+      throw new HttpException('Không tìm thấy đơn', HttpStatus.NOT_FOUND);
     } catch (error) {
-      throw new HttpException("Không tìm thấy đơn", HttpStatus.NOT_FOUND);
+      throw new HttpException('Không tìm thấy đơn', HttpStatus.NOT_FOUND);
     }
   }
 }
