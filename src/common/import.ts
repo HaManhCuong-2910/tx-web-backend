@@ -9,6 +9,7 @@ import { ServiceModule } from 'src/service/service.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from 'src/auth/auth.module';
 import { CategoriesModule } from 'src/categories/categories.module';
+import { EvaluateModule } from 'src/evaluate/evaluate.module';
 export const importApp = [
   ...connectDataBase,
   ...jwtDefaultConfig,
@@ -23,4 +24,5 @@ export const importApp = [
   AuthModule,
   ServiceModule,
   CategoriesModule,
+  EvaluateModule,
 ];
