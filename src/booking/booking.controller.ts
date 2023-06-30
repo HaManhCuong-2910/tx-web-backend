@@ -41,6 +41,11 @@ export class BookingController {
     return await this.BookingService.createBooking(body);
   }
 
+  @Post('/payment-momo')
+  async paymentMomo(@Body() body: any) {
+    return await this.BookingService.paymentMomo(body);
+  }
+
   @Put('/update')
   async updateBooking(@Body() body: UpdateBookingDto) {
     return await this.BookingService.updateBooking(body);
