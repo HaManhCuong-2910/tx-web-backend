@@ -43,19 +43,6 @@ export enum EStatusPaymentOrder {
   NO_PAY = 0,
 }
 
-export enum ETypeService {
-  ROOM_SERVICE = 'ROOM_SERVICE',
-  OTHER_SERVICE = 'OTHER_SERVICE',
-  TOUR_SERVICE = 'TOUR_SERVICE',
-}
-
-export enum EStatusBookingRoom {
-  CHUA_NHAN_PHONG = 'CHUA_NHAN_PHONG',
-  DA_NHAN_PHONG = 'DA_NHAN_PHONG',
-  DA_TRA_PHONG = 'DA_TRA_PHONG',
-  HUY_DAT = 'HUY_DAT',
-}
-
 export const formatNumberMoney = (value: number | string) => {
   let valueNumber = value;
   if (typeof value !== 'string') {
@@ -65,18 +52,8 @@ export const formatNumberMoney = (value: number | string) => {
   return formatter.format(valueNumber as number).split(',')[0];
 };
 
-export const filterAccount = (user: any) => {
-  return {
-    id: `${user._id || user.id}`,
-    status: user.status,
-    roles: user.roles,
-  };
-};
-
-export const randomNumberCustomLength = (length: number) => {
-  return Math.floor(
-    Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1),
-  );
+export const searchFullText = (value: string) => {
+  return { $regex: '.*' + value + '.*', $options: 'i' };
 };
 
 export const saltOrRounds = 10;

@@ -1,4 +1,3 @@
-import { HttpException } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { FilterQuery, Model, QueryOptions } from 'mongoose';
 
