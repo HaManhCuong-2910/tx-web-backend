@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ProductsModule } from 'src/products/products.module';
-import { WarehouseModule } from 'src/warehouse/warehouse.module';
+import { JwtService } from '@nestjs/jwt';
+import { AuthModule } from 'src/auth/auth.module';
 @Module({
-  imports: [ProductsModule, WarehouseModule],
+  imports: [AuthModule],
   providers: [],
-  exports: [ProductsModule, WarehouseModule],
+  exports: [AuthModule],
 })
 export class FeatureModule {}
