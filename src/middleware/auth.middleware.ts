@@ -33,7 +33,9 @@ export class AuthMiddleware implements NestMiddleware {
       } else if (err.status === HttpStatusCommon.LOCKED) {
         throw err;
       } else {
-        throw new UnauthorizedException();
+        throw new UnauthorizedException(
+          'Tài khoản hoặc mật khẩu không chính xác',
+        );
       }
     }
     next();

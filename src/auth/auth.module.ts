@@ -7,10 +7,12 @@ import { authSchema } from './models/auth.model';
 import { AuthRepository } from './repository/auth.repository';
 import { JwtService } from '@nestjs/jwt';
 import { CoreModule } from 'src/modules/core.module';
+import { MessageModule } from 'src/messages/messages.module';
 
 @Module({
   imports: [
     CoreModule,
+    MessageModule,
     MongooseModule.forFeature([
       {
         name: 'Auth',
