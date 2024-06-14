@@ -6,10 +6,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    MailModule,
     MongooseModule.forRoot(process.env.DATABASE_URL),
     JwtModule.register({
       secret: process.env.JWT_SECRET,

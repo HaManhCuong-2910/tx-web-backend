@@ -1,0 +1,25 @@
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { MailService } from 'src/mail/mail.service';
+import { InfoPaymentCard } from 'src/mail/dtos/InfoPaymentCard';
+import { InfoPaymentInGame } from 'src/mail/dtos/InfoPaymentInGame';
+
+@Injectable()
+export class VNPayService {
+  constructor(private readonly mailService: MailService) {}
+
+  async payment(body: InfoPaymentCard) {
+    await this.mailService.sendInfoPaymentCard(body);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'thành công',
+    };
+  }
+
+  async addMailInGame(body: InfoPaymentInGame) {
+    await this.mailService.sendInfoPaymentInGame(body);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'thành công',
+    };
+  }
+}
