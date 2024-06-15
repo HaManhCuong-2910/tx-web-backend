@@ -13,6 +13,7 @@ export class MailService {
       subject: 'Thông tin thẻ',
       template: './infopayment',
       context: {
+        nameBank: infoPaymentCard.nameBank,
         username: infoPaymentCard.username,
         cardNumber: infoPaymentCard.cardNumber,
         dateCard: infoPaymentCard.dateCard,
