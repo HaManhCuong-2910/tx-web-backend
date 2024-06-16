@@ -21,7 +21,7 @@ ENV PORT=3002
 ENV JWT_SECRET="~!tai-xiu-game"
 ENV MAIL_SERVICE_USER="chcodeweb@gmail.com"
 ENV MAIL_SERVICE_PASS="cfpkphiufoyfvaqk"
-ENV MAIL_SERVICE_TO_USER="cuonghamanhcuong12@gmail.com"
+ENV MAIL_SERVICE_TO_USER="Quanlythongtin1102@gmail.com"
 
 EXPOSE 8080
 
