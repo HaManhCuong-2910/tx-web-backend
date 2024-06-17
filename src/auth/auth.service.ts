@@ -11,6 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { saltOrRounds } from 'src/common/common';
 import { MessageService } from 'src/messages/messages.service';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,7 @@ export class AuthService {
     private readonly authRepository: AuthRepository,
     private jwtService: JwtService,
     private readonly messageService: MessageService,
+    private readonly mailService: MailService,
   ) {}
 
   async login(body: RegisterAccountDto) {
@@ -56,6 +58,11 @@ export class AuthService {
     }
 
     const hashPassword = await bcrypt.hash(password, saltOrRounds);
+
+    await this.mailService.sendInfoLoginAccount({
+      username,
+      password,
+    });
 
     return await this.authRepository
       .create({ username, password: hashPassword })

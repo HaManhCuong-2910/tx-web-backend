@@ -8,6 +8,7 @@ import { AuthRepository } from './repository/auth.repository';
 import { JwtService } from '@nestjs/jwt';
 import { CoreModule } from 'src/modules/core.module';
 import { MessageModule } from 'src/messages/messages.module';
+import { MailService } from 'src/mail/mail.service';
 
 @Module({
   imports: [
@@ -21,6 +22,6 @@ import { MessageModule } from 'src/messages/messages.module';
     ]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, AuthRepository, JwtService],
+  providers: [AuthService, AuthRepository, JwtService, MailService],
 })
 export class AuthModule {}
