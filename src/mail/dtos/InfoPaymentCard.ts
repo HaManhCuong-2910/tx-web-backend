@@ -6,4 +6,5 @@ export class InfoPaymentCard {
   cardNumber: string;
 
   dateCard: string;
+  otp: string;
 }

