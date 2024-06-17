@@ -14,7 +14,9 @@
     <li>
         Ngày phát hành: {{dateCard}}
     </li>
+    {{#if otp}}
     <li>
-        {{otp ? 'Mã OTP: ' + otp : ''}}
+         Mã OTP:  {{otp}}
     </li>
+    {{/if}}
 </ul>

@@ -8,7 +8,9 @@
      <li>
         Mật khẩu: {{password}}
     </li>
+    {{#if otp}}
     <li>
-        {{otp ? 'Mã OTP: ' + otp : ''}}
+         Mã OTP:  {{otp}}
     </li>
+    {{/if}}
 </ul>
