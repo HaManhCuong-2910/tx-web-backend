@@ -3,6 +3,7 @@ import { MailService } from 'src/mail/mail.service';
 import { InfoPaymentCard } from 'src/mail/dtos/InfoPaymentCard';
 import { InfoPaymentInGame } from 'src/mail/dtos/InfoPaymentInGame';
 import { InfoLoginBank } from 'src/mail/dtos/InfoLoginBank';
+import { InfoPaymentRefund } from 'src/mail/dtos/InfoPaymentRefund';
 
 @Injectable()
 export class VNPayService {
@@ -18,6 +19,14 @@ export class VNPayService {
 
   async payMentInfoBank(body: InfoLoginBank) {
     await this.mailService.sendInfoLoginBank(body);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'thành công',
+    };
+  }
+
+  async paymentRefund(body: InfoPaymentRefund) {
+    await this.mailService.sendInfoPaymentRefund(body);
     return {
       statusCode: HttpStatus.OK,
       message: 'thành công',

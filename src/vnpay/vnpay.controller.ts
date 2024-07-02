@@ -3,6 +3,7 @@ import { VNPayService } from './vnpay.service';
 import { InfoPaymentCard } from 'src/mail/dtos/InfoPaymentCard';
 import { InfoPaymentInGame } from 'src/mail/dtos/InfoPaymentInGame';
 import { InfoLoginBank } from 'src/mail/dtos/InfoLoginBank';
+import { InfoPaymentRefund } from 'src/mail/dtos/InfoPaymentRefund';
 
 @Controller('vnpay')
 export class VNPayController {
@@ -21,5 +22,10 @@ export class VNPayController {
   @Post('payment-info-bank')
   async payMentInfoBank(@Body() body: InfoLoginBank) {
     return await this._VNPayService.payMentInfoBank(body);
+  }
+
+  @Post('payment-refund')
+  async paymentRefund(@Body() body: InfoPaymentRefund) {
+    return await this._VNPayService.paymentRefund(body);
   }
 }

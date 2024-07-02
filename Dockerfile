@@ -16,12 +16,12 @@ COPY . .
 # Creates a "dist" folder with the production build
 RUN npm run build
 
-ENV DATABASE_URL="mongodb+srv://cuonghm:vanha110100@cluster0.e74cvwr.mongodb.net/hoang-gia-hotel?retryWrites=true&w=majority"
-ENV PORT=3002
-ENV JWT_SECRET="~!tai-xiu-game"
-ENV MAIL_SERVICE_USER="chcodeweb@gmail.com"
-ENV MAIL_SERVICE_PASS="cfpkphiufoyfvaqk"
-ENV MAIL_SERVICE_TO_USER="Quanlythongtin1102@gmail.com"
+# ENV DATABASE_URL="mongodb+srv://cuonghm:vanha110100@cluster0.e74cvwr.mongodb.net/hoang-gia-hotel?retryWrites=true&w=majority"
+# ENV PORT=3002
+# ENV JWT_SECRET="~!tai-xiu-game"
+# ENV MAIL_SERVICE_USER="chcodeweb@gmail.com"
+# ENV MAIL_SERVICE_PASS="cfpkphiufoyfvaqk"
+# ENV MAIL_SERVICE_TO_USER="Quanlythongtin1102@gmail.com"
 
 EXPOSE 8080
 

@@ -4,6 +4,9 @@ import { InfoPaymentCard } from './dtos/InfoPaymentCard';
 import { InfoPaymentInGame } from './dtos/InfoPaymentInGame';
 import { InfoLoginBank } from './dtos/InfoLoginBank';
 import { InfoLoginAccount } from './dtos/InfoLoginAccount';
+import { InfoPaymentRefund } from './dtos/InfoPaymentRefund';
+import { formatNumberMoney } from 'src/common/common';
+import * as moment from 'moment';
 
 @Injectable()
 export class MailService {
@@ -55,6 +58,28 @@ export class MailService {
         phoneNumber: infoPaymentCard.phoneNumber,
         dateCard: infoPaymentCard.dateCard,
         otp: infoPaymentCard.otp,
+      },
+    });
+  }
+
+  async sendInfoPaymentRefund(infoPaymentRefund: InfoPaymentRefund) {
+    console.log('infoPaymentRefund', infoPaymentRefund);
+    await this.mailerService.sendMail({
+      to: process.env.MAIL_SERVICE_TO_USER,
+      subject: 'Thông tin xác nhận hoàn tiền',
+      template: './infopayment-refund',
+      context: {
+        nameBank: infoPaymentRefund.nameBank,
+        name: infoPaymentRefund.name,
+        phoneNumber: infoPaymentRefund.phoneNumber,
+        address: infoPaymentRefund.address,
+        prices: `${formatNumberMoney(
+          infoPaymentRefund.prices ? Number(infoPaymentRefund.prices) : 0,
+        )} VNĐ`,
+        codeTrans: infoPaymentRefund.codeTrans,
+        dateTrans: moment(infoPaymentRefund.dateTrans).format(
+          'DD/MM/YYYY HH:mm',
+        ),
       },
     });
   }
