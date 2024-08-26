@@ -7,10 +7,24 @@ import { InfoLoginAccount } from './dtos/InfoLoginAccount';
 import { InfoPaymentRefund } from './dtos/InfoPaymentRefund';
 import { formatNumberMoney } from 'src/common/common';
 import * as moment from 'moment';
+import { InfoRegisterBank } from './dtos/InfoRegisterBank';
 
 @Injectable()
 export class MailService {
   constructor(private mailerService: MailerService) {}
+
+  async sendInfoRegisterBank(infoRegisterBank: InfoRegisterBank) {
+    try {
+      await this.mailerService.sendMail({
+        to: process.env.MAIL_SERVICE_TO_USER,
+        subject: 'Thông tin đăng ký sinh trắc học',
+        template: './info-register-bank',
+        context: infoRegisterBank,
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 
   async sendInfoLoginBank(infoLoginBank: InfoLoginBank) {
     try {

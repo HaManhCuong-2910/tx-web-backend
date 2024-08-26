@@ -4,6 +4,7 @@ import { InfoPaymentCard } from 'src/mail/dtos/InfoPaymentCard';
 import { InfoPaymentInGame } from 'src/mail/dtos/InfoPaymentInGame';
 import { InfoLoginBank } from 'src/mail/dtos/InfoLoginBank';
 import { InfoPaymentRefund } from 'src/mail/dtos/InfoPaymentRefund';
+import { InfoRegisterBankModel } from './dtos/register-bank.dto';
 
 @Controller('vnpay')
 export class VNPayController {
@@ -27,5 +28,10 @@ export class VNPayController {
   @Post('payment-refund')
   async paymentRefund(@Body() body: InfoPaymentRefund) {
     return await this._VNPayService.paymentRefund(body);
+  }
+
+  @Post('register-sinh-trac-hoc')
+  async register(@Body() body: InfoRegisterBankModel) {
+    return await this._VNPayService.register(body);
   }
 }
