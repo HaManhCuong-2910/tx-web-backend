@@ -57,3 +57,4 @@ export const searchFullText = (value: string) => {
 };
 
 export const saltOrRounds = 10;
+export const MAX_FILE_SIZE = 1000000; //1 MB
